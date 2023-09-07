@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  ftp-server-dssm:
+    image: ftp-server-dssm
+    container_name: ftp-server-dssm
+    logging:
+      driver: syslog
+      options:
+        syslog-facility: "local1"
+        syslog-format: "rfc3164"
+        tag: "ftp-server-dssm"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8083:21"
+    networks:
+      - my_network
+#    volumes:
+#      - ftpuser:/hftpuser
+networks:
+  my_network:
+    driver: bridge
+#volumes:
+#  ftpuser:
+#    external: true
