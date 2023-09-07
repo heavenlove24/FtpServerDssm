@@ -31,12 +31,12 @@ public class Main {
         BaseUser user = new BaseUser();
         user.setName("admin");
         user.setPassword("admin");
-        user.setHomeDirectory("D:\\ftproot");
+        user.setHomeDirectory("/ftpuser");
         List<Authority> authorities = new ArrayList<>();
         String rights = "pwd|cd|dir|put|get|rename|delete|mkdir|rmdir|append";
         parseAuthorities(authorities, rights);
         authorities.add(new WritePermission());
-        authorities.add(new ConcurrentLoginPermission(10, 5));
+        authorities.add(new ConcurrentLoginPermission(50, 50));
         user.setAuthorities(authorities);
         um.save(user);
         serverFactory.setUserManager(um);
