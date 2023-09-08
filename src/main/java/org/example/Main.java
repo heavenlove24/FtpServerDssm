@@ -6,6 +6,7 @@ import org.apache.ftpserver.command.CommandFactoryFactory;
 import org.apache.ftpserver.ftplet.Authority;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.UserManager;
+import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.ConcurrentLoginPermission;
@@ -25,6 +26,11 @@ public class Main {
         CommandFactoryFactory commandFactoryFactory = new CommandFactoryFactory();
         commandFactoryFactory.addCommand("ALLO", new Allo());
         serverFactory.setCommandFactory(commandFactoryFactory.createCommandFactory());
+
+        ListenerFactory listenerFactory = new ListenerFactory();
+        listenerFactory.setPort(21);
+        listenerFactory.setServerAddress("0.0.0.0");
+        serverFactory.addListener("default", listenerFactory.createListener());
 
         PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
         UserManager um = userManagerFactory.createUserManager();
