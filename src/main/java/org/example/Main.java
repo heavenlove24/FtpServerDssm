@@ -1,5 +1,6 @@
 package org.example;
 
+import org.apache.ftpserver.DataConnectionConfigurationFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.command.CommandFactoryFactory;
@@ -27,9 +28,13 @@ public class Main {
         commandFactoryFactory.addCommand("ALLO", new Allo());
         serverFactory.setCommandFactory(commandFactoryFactory.createCommandFactory());
 
+        DataConnectionConfigurationFactory dataConfigFactory = new DataConnectionConfigurationFactory();
+        dataConfigFactory.setPassiveAddress("0.0.0.0");
+
         ListenerFactory listenerFactory = new ListenerFactory();
         listenerFactory.setPort(21);
         listenerFactory.setServerAddress("0.0.0.0");
+        listenerFactory.setDataConnectionConfiguration(dataConfigFactory.createDataConnectionConfiguration());
         serverFactory.addListener("default", listenerFactory.createListener());
 
         PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
