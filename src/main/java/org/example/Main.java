@@ -29,7 +29,7 @@ public class Main {
         serverFactory.setCommandFactory(commandFactoryFactory.createCommandFactory());
 
         DataConnectionConfigurationFactory dataConfigFactory = new DataConnectionConfigurationFactory();
-        dataConfigFactory.setPassiveAddress("0.0.0.0");
+        dataConfigFactory.setPassiveExternalAddress("0.0.0.0");
 
         ListenerFactory listenerFactory = new ListenerFactory();
         listenerFactory.setPort(21);
